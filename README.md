@@ -32,7 +32,7 @@ auth.Auth("[YOUR FIREBASE API KEY]")
 res := auth.SignInWithEmailAndPassword("[EMAIL]", "[PASSWORD]")
 if res.Status() {
   user = res.Result()
-  fmt.Println(res.Email + " is signed in")
+  fmt.Println(user.Email + " is signed in")
 } else {
   // EMAIl_NOT_FOUND 沒有此用戶
   // INVALID_PASSWORD 密碼錯誤
