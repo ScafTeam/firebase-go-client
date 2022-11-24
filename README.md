@@ -91,7 +91,7 @@ if res.Status() {
 ### 更新使用者密碼
 
 ```go
-res := auth.UpdatePassword(user, "testtest")
+res := auth.UpdatePassword(user, "[new password]")
 if res.Status() {
   fmt.Println("Password is updated")
 } else {
@@ -108,7 +108,7 @@ Remember: 修改完密碼後，應需要重新登入，重新獲取新的 token
 
 ```go
 res := auth.UpdateProfile(user, map[string]string{
-  "displayName": "test",
+  "[user profile]": "[new value]",
 })
 if res.Status() {
   fmt.Println("Profile is updated")
