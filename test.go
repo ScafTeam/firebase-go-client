@@ -1,8 +1,8 @@
 package main
 
 import (
-	"firebase-go-client/auth"
 	"fmt"
+	"github.com/ScafTeam/firebase-go-client/auth"
 )
 
 func signIn() auth.User {
