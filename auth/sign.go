@@ -1,28 +1,35 @@
 package auth
 
 type SignInRes struct {
-	Error        ErrorRes `json:"error"`
-	Email        string   `json:"email"`
-	LocalId      string   `json:"localId"`
-	DisplayName  string   `json:"displayName"`
-	IdToken      string   `json:"idToken"`
-	Registered   bool     `json:"registered"`
-	RefreshToken string   `json:"refresh"`
-	ExpiresIn    string   `json:"expiresIn"`
+	Error ErrorRes `json:"error"`
+	User
 }
 
 func (res SignInRes) Status() bool {
-	if res.Error.Code != 0 {
-		return false
-	} else {
-		return true
-	}
+	return res.Error.Status()
 }
 
-func (res SignInRes) Message() string {
+func (res SignInRes) Result() User {
+	return res.User
+}
+
+func (res SignInRes) ErrorMessage() string {
 	return res.Error.Message
 }
 
-func (res SignInRes) User() string {
-	return res.Email
+type SignUpRes struct {
+	Error ErrorRes `json:"error"`
+	User
+}
+
+func (res SignUpRes) Status() bool {
+	return res.Error.Status()
+}
+
+func (res SignUpRes) Result() User {
+	return res.User
+}
+
+func (res SignUpRes) ErrorMessage() string {
+	return res.Error.Message
 }
