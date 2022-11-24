@@ -1,3 +1,3 @@
-module firebase-go-client
+module github.com/ScafTeam/firebase-go-client
 
 go 1.19
