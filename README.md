@@ -16,7 +16,7 @@ package main
 import (
   "fmt"
 
-  "github.com/scaf-team/firebase-go-client"
+  "github.com/scaf-team/firebase-go-client/auth"
 )
 ```
 
@@ -115,6 +115,19 @@ if res.Status() {
 } else {
   // INVALID_ID_TOKEN 用戶身份驗證失敗
   // USER_NOT_FOUND 沒有此用戶
+  fmt.Println(res.ErrorMessage())
+}
+```
+
+### 忘記密碼
+
+```go
+res := auth.ForgotPassword("yahing606s6@gmail.com")
+if res.Status() {
+  fmt.Println("Email is sent")
+  fmt.Println(res)
+} else {
+  // EMAIL_NOT_FOUND 沒有此用戶
   fmt.Println(res.ErrorMessage())
 }
 ```

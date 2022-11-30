@@ -7,7 +7,7 @@ import (
 
 func signIn() auth.User {
 	var user auth.User
-	res := auth.SignInWithEmailAndPassword("test@test.com", "testtest1")
+	res := auth.SignInWithEmailAndPassword("yahing6066@gmail.com", "123456")
 	if res.Status() {
 		user = res.Result()
 		fmt.Println(user.Email + " is signed in")
@@ -74,14 +74,28 @@ func UpdateProfile(user auth.User) {
 	}
 }
 
+func ForgotPassword() {
+	res := auth.ForgotPassword("yahing606s6@gmail.com")
+	if res.Status() {
+		fmt.Println("Email is sent")
+		fmt.Println(res)
+	} else {
+		// EMAIL_NOT_FOUND 沒有此用戶
+		fmt.Println(res.ErrorMessage())
+	}
+}
+
 func main() {
 	auth.Auth("AIzaSyBUTf0DULItJDOl1t6tvTZ8_sP8_wL-cPg")
 	// var res auth.Res
-	var user auth.User
+	// var user auth.User
 
-	user = signIn()
+	// signIn()
+	// user = signIn()
 	// user = signUp()
-	getUserDetail(user)
-	UpdateProfile(user)
-	updatePassword(user)
+	// getUserDetail(user)
+	// UpdateProfile(user)
+	// updatePassword(user)
+	ForgotPassword()
+
 }

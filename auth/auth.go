@@ -26,6 +26,10 @@ func (res ErrorRes) Status() bool {
 	}
 }
 
+func (res ErrorRes) ErrorMessage() string {
+	return res.Message
+}
+
 var apiKey string
 
 func Auth(_apiKey string) {
@@ -141,4 +145,26 @@ func UpdatePassword(user User, password string) UserDetailRes {
 
 func UpdateProfile(user User, data map[string]string) UserDetailRes {
 	return updateUser(user.IdToken, data)
+}
+
+func ForgotPassword(email string) ErrorRes {
+	res, err := http.Post("https://identitytoolkit.googleapis.com"+
+		"/v1/accounts:sendOobCode?key="+apiKey, "application/json",
+		bytes.NewBuffer([]byte(`{"requestType":"PASSWORD_RESET","email":"`+email+`"}`)))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer res.Body.Close()
+
+	sitemap, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ret := ErrorRes{}
+	sitemap_s := []byte(string(sitemap))
+	json.Unmarshal(sitemap_s, &ret)
+
+	return ret
 }
